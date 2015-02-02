@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Translate API Example</title>
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+</head>
+
+<body>
+  <div class="container" style="margin-top:50px;">
+    <div class="row">
+      <div class="col-md-12">
+        <p>The <b>tiger</b> (<i>Panthera tigris</i>) is the largest <a href="/wiki/Felidae" title="Felidae">cat species</a>, reaching a total body length of up to 3.38&nbsp;m (11.1&nbsp;ft) over curves and weighing up to 388.7&nbsp;kg (857&nbsp;lb) in the wild. Its most recognisable feature is a pattern of dark vertical stripes on reddish-orange fur with a lighter underside. The species is classified in the genus <i><a href="/wiki/Panthera" title="Panthera">Panthera</a></i> with the <a href="/wiki/Lion" title="Lion">lion</a>, <a href="/wiki/Leopard" title="Leopard">leopard</a>, <a href="/wiki/Jaguar" title="Jaguar">jaguar</a> and <a href="/wiki/Snow_leopard" title="Snow leopard">snow leopard</a>. Tigers are <a href="/wiki/Apex_predator" title="Apex predator">apex predators</a>, primarily preying on <a href="/wiki/Ungulate" title="Ungulate">ungulates</a> such as <a href="/wiki/Deer" title="Deer">deer</a> and <a href="/wiki/Bovid" title="Bovid" class="mw-redirect">bovids</a>. They are territorial and generally <a href="/wiki/Solitary_but_social" title="Solitary but social" class="mw-redirect">solitary but social</a> animals, often requiring large contiguous areas of habitat that support their prey requirements. This, coupled with the fact that they are indigenous to some of the more densely populated places on Earth, has caused significant <a href="/wiki/Human-animal_interaction" title="Human-animal interaction" class="mw-redirect">conflicts with humans</a>.</p>
+      </div>
+    </div>
+    <input type="button" value="tr" type="submit" onClick="ourtranslate()">
+  </div>
+  <script>
+    function translateText(response) {
+      document.body.innerHTML = response.data.translations[0].translatedText;
+    }
+  </script>
+  <script>
+  function ourtranslate(){
+    var newScript = document.createElement('script');
+    newScript.type = 'text/javascript';
+    var sourceText = escape(document.body.innerHTML);
+    // WARNING: be aware that YOUR-API-KEY inside html is viewable by all your users.
+    // Restrict your key to designated domains or use a proxy to hide your key
+    // to avoid misuage by other party.
+    var source = 'https://www.googleapis.com/language/translate/v2?key=AIzaSyDnlr2pbGEfUbpEH669KAuD9P0Sjq5ptS4&source=en&target=tr&callback=translateText&q=' + sourceText;
+    newScript.src = source;
+
+    // When we add this script to the head, the request is sent off.
+    document.getElementsByTagName('head')[0].appendChild(newScript);
+  }
+  </script>
+</body>
+
+</html>
